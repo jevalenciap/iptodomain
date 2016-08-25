@@ -1,10 +1,15 @@
 # iptodomain
-This tool allow you to extract domains from a IP range, using the historic information archived in Virustotal. It is usefull if you want to know what domains are behind of this IP address, for example in bug bounty programs one of the first steps is to extract subdomains, this tool can help with this task... first you have to find out the IP range that uses a company. Many times a good start point is to know the AS (Autonomus system) number, then you can find the IP range
 
-ejm:
+Description:
+This tool allow you to extract domains from a IP range, using the historic information archived in Virustotal(using API key). It is usefull if you want to know what domains are behind of this IP address, for example in bug bounty programs one of the first steps is to extract subdomains, this tool can help with this task... first you have to find out the IP range that uses a company. Many times a good start point is to know the AS (Autonomus system) number, then you can find the IP range.
+
+To use this tool you have to set up your Virustotal API key in the code, please sign up on Virustotal then they provide you the API key.
+
+Example:
 python iptodomain.py -i 103.22.201.25  -f 103.22.201.255  -o 103.22.200.255.txt -v -r IPsCF.txt
 
 
+Options:
 
 python iptodomain.py 
 usage: iptodomain.py [-h] [-i FIRST_IP] [-f LAST_IP] [-w FILE2] [-o FILE1]
