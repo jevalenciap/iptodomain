@@ -98,7 +98,7 @@ ip_range = ipRange(fi, li)
 
 for ip in ip_range:
      url = 'https://www.virustotal.com/vtapi/v2/ip-address/report'
-     parameters = {'ip': ip, 'apikey': '3c052e9a7339f3a73f00bd67baea747e4a7f15ee6c1596e59590fd9567b1ef'} # please enter your Virustotal API key, if you do not have one, there is a free API... sign up to Virustotal  
+     parameters = {'ip': ip, 'apikey': '3c052e9a7339f3a73f00bd67baea747e47f59ee6c1596e59590fd953d00ce519'} # please enter your Virustotal API key, if you do not have one, there is a free API... sign up to Virustotal  
      response = urllib.urlopen('%s?%s' % (url, urllib.urlencode(parameters))).read()
      response_dict = json.loads(response)
 
