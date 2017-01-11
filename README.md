@@ -1,5 +1,5 @@
 # iptodomain
-<img src="https://cloud.githubusercontent.com/assets/6917066/21866468/6590ab3a-d818-11e6-89f7-609e2d8f1171.jpg" alt="iptodomain" height="42" width="42">
+<img src="https://cloud.githubusercontent.com/assets/6917066/21866468/6590ab3a-d818-11e6-89f7-609e2d8f1171.jpg" alt="iptodomain" height="504" width="228">
 
 Description:
 This tool allow you to extract domains from a IP range, using the historic information archived in Virustotal(using API key). It is usefull if you want to know what domains are behind of this IP address, for example in bug bounty programs one of the first steps is to extract subdomains, this tool can help with this task... first you have to find out the IP range that uses a company. Many times a good start point is to know the AS (Autonomus system) number, then you can find the IP range.
