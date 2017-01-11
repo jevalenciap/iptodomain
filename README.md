@@ -39,3 +39,7 @@ optional arguments:
   -v   It shows more information while you are scanning.
   
   -r   FILE3     Please enter the name of the final report without duplicate domains results.
+  
+  This tool was created by:
+  
+  Juan Esteban Valencia Pantoja
