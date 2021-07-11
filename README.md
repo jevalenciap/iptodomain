@@ -2,7 +2,8 @@
 <img src="https://cloud.githubusercontent.com/assets/6917066/21866468/6590ab3a-d818-11e6-89f7-609e2d8f1171.jpg" alt="iptodomain" height="228" width="504">
 
 
-Update V2 :It was migrated from python 2.7 to 3.8.10. Now It supports an input file and csv output file.
+
+<b>Update V2 :It was migrated from python 2.7 to 3.8.10. Now It supports an input file and csv output file.</b>
 
 
 Description:
