@@ -25,13 +25,21 @@ python3 iptodomain.py
 usage: iptodomain3.py [-h] [-l FIRST_IP] [-k LAST_IP] [-f INPUT_FILE] [-w FILE2] [-o FILE1] [-v] [-r FILE3]
 
   -h, --help     show this help message and exit
+  
   -l FIRST_IP    The First IP of the range that you want to scan
+  
   -k LAST_IP     The Last IP of the range that you want to scan.
+  
   -f INPUT_FILE  Input file with IPs.
+  
   -w FILE2       Please enter the output file name, it will save a report with all domains and its IPs in .csv format
+  
   -o FILE1       Please enter the file name where the all IPs and domains found are going to save in txt format.
+  
   -v             It shows more information while you are scanning.
+  
   -r FILE3       Please enter the output file name, it will save a report without duplicate domains results
+  
 
 This tool allow to extract domains from IP information on Virustotal and save
 the output in a file(txt, csv). You have to set up the IP range where you like to
