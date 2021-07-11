@@ -1,21 +1,23 @@
 import json
-import urllib
 import time
 import argparse
 import sys
+import urllib.request
+
 
 parser = argparse.ArgumentParser(
     description='This tool allow to extract domains from  IP information on Virustotal and save the output in a file. You have to set up the IP range where you like to extract domain or subdomain. Additionally it is neccesary set up your VirusTotal API key in the code.')
-parser.add_argument('-i', action="store", dest='FIRST_IP', help='The First IP of the range that you want to scan')
-parser.add_argument('-f', action="store", dest='LAST_IP', help='The Last IP of the range that you want to scan.')
+parser.add_argument('-l', action="store", dest='FIRST_IP', help='The First IP of the range that you want to scan')
+parser.add_argument('-k', action="store", dest='LAST_IP', help='The Last IP of the range that you want to scan.')
+parser.add_argument('-f', action="store", dest='INPUT_FILE', help='Input file with IPs.')
 parser.add_argument('-w', action="store", dest='File2',
-                    help='Please enter the file name where report with all domains and its IPs are going to save.')
+                    help='Please enter the output file name, it will save a report with all domains and its IPs in .csv format')
 parser.add_argument('-o', action="store", dest='File1',
-                    help='Please enter the file name where the all domains found are going to save. ')
+                    help='Please enter the file name where the all IPs and domains found are going to save in txt format. ')
 parser.add_argument('-v', action="store_false", dest='Verbose', default=True,
                     help='It shows  more information while you are scanning.')
 parser.add_argument('-r', action="store", dest='File3',
-                    help='Please enter the name of the final Report without duplicate domains results')
+                    help='Please enter the output file name, it will save a report without duplicate domains results')
 args = parser.parse_args()
 
 if len(sys.argv) == 1:
@@ -25,17 +27,21 @@ argd = parser.parse_args()
 
 args = vars(args)
 
-if args['FIRST_IP'] is None:
-    print "Enter the IP information example... 18.2.4.4"
-    sys.exit()
-else:
-    fi = args['FIRST_IP']
+if args['INPUT_FILE'] is None:
 
-if args['LAST_IP'] is None:
-    print "Enter the IP information example... 18.2.4.10"
-    sys.exit()
+    if (args['FIRST_IP'] or args['LAST_IP']) is None:
+        print ("Enter the input IP information example... 18.2.4.4")
+        sys.exit()
+    else:
+        fi = args['FIRST_IP']
+        li = args['LAST_IP']
+        it = True
 else:
-    li = args['LAST_IP']
+    it = False
+    inputfile = args['INPUT_FILE']
+
+
+
 
 if argd.Verbose:
     cp = 'False'
@@ -47,23 +53,22 @@ f2 = ''
 
 if args['File1'] is None:
     if args['File2'] is None:
-        print "Enter -w or -o in orden to save the results in a file and no lose the progress if there is a problem"
+        print ("Enter -w or -o in orden to save the results in a file and no lose the progress if there is a problem")
         sys.exit()
     else:
         ctr = 1
         f2 = args['File2']
 else:
     f1 = args['File1']
-    if args['File2'] is None:
-        ctr = 0
-    else:
-        ctr = 2
-        f2 = args['File2']
+    ctr = 0
+        
+    
 
 oa = False
 if args['File3'] is not None:
     f3 = args['File3']
     oa = True
+
 
 
 def ipRange(start_ip, end_ip):
@@ -94,17 +99,41 @@ if oa:
 
 s = list()
 ok = 0
-ip_range = ipRange(fi, li)
+
+
+if (it == True):
+
+   ip_range = ipRange(fi, li)
+   
+
+else:
+
+   ip_range = []
+   with open(inputfile) as my_file:
+    for line in my_file:
+        line= line.rstrip('\n')
+        ip_range.append(str(line))
+   
+
+
+if ctr == 1:
+            file2.write('IP'+','+'Domains' + '\n')
+
 
 for ip in ip_range:
     url = 'https://www.virustotal.com/vtapi/v2/ip-address/report'
     parameters = {'ip': ip,
-                  'apikey': '3c052e9a7339f3a73f00bd67baea747e47f59ee6c1596e59590fd953d00ce519'}  # please enter your Virustotal API key, if you do not have one, there is a free API... sign up to Virustotal
-    response = urllib.urlopen('%s?%s' % (url, urllib.urlencode(parameters))).read()
+                  'apikey': 'aeead79c23a596d96bbc8e45a01c2d3b0d33e39ec9a2424b203835d88f318d04'}  # please enter your Virustotal API key, if you do not have one, it is a free API... sign up to Virustotal
+    response = urllib.request.urlopen('%s?%s' % (url, urllib.parse.urlencode(parameters))).read()
+
+
+    print ('Scanning IP: ', ip)
+    if cp =='True' :
+        print (response)
     response_dict = json.loads(response)
 
-    if cp == 'True':
-        print 'Scanning IP: ', ip
+    
+        
 
     cod = (response_dict.get("response_code"))
 
@@ -112,24 +141,32 @@ for ip in ip_range:
         u = (response_dict.get("resolutions"))
 
         i = len(u)
-
+        
+        if ctr == 1:
+            file2.write(ip +  ',')
+ 
         while i > 0:
             i -= 1
             b = response_dict.get("resolutions")[i].get("hostname")
             s.append(b)
             m = list(set(s))
-            print b
+            print (b)
 
-            if ctr == 2:
+            if ctr == 1:
 
-                file2.write(ip + '    ' + b + '\n')
-                file1.write(b + '\n')
+                file2.write(  b + '  ')
+                                 
 
-            elif ctr == 1:
-                file2.write(ip + '    ' + b + '\n')
+            elif ctr == 0:
+                file1.write(ip + '    ' + b + '\n')
+        
+        if ctr == 1:
+            file2.write  ('\n')   
 
-            else:
-                file1.write(b + '\n')
+    
+    if cod == 0:
+        if ctr == 1:
+              file2.write(ip + ',' + '\n')
 
     time.sleep(15)
 
