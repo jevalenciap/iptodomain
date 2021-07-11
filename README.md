@@ -11,6 +11,9 @@ To use this tool you have to set up your Virustotal API key in the code, please 
 
 Example:
 
+<pre>
+  <code>
+
 python3 iptodomain3.py -f ips.txt  -w output.csv -v
 
 python3 iptodomain.py -l 103.22.201.25 -k 103.22.201.255 -o result.txt
@@ -46,7 +49,8 @@ the output in a file(txt, csv). You have to set up the IP range where you like t
 extract domain or subdomain or provide an IP list. Additionally it is neccesary set up your
 VirusTotal API key in the code.
 
-
+</code>
+</pre>
   
   This tool was created by:
   
