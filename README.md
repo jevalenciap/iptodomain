@@ -18,14 +18,19 @@ python3 iptodomain3.py -f ips.txt  -w output.csv -v
 
 python3 iptodomain.py -l 103.22.201.25 -k 103.22.201.255 -o result.txt
 
+</code>
+</pre>
 
-Options:
 
+Usage:
+
+<pre>
+  <code>
 
 python3 iptodomain.py 
 
 
-usage: iptodomain3.py [-h] [-l FIRST_IP] [-k LAST_IP] [-f INPUT_FILE] [-w FILE2] [-o FILE1] [-v] [-r FILE3]
+usage: iptodomain.py [-h] [-l FIRST_IP] [-k LAST_IP] [-f INPUT_FILE] [-w FILE2] [-o FILE1] [-v] [-r FILE3]
 
   -h, --help     show this help message and exit
   
