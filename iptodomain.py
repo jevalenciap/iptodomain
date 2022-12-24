@@ -123,7 +123,7 @@ if ctr == 1:
 for ip in ip_range:
     url = 'https://www.virustotal.com/vtapi/v2/ip-address/report'
     parameters = {'ip': ip,
-                  'apikey': 'aeead79c23a596d96bbc8e45a01c2d3b0d33e39ec9a2424b203835d88f318d04'}  # please enter your Virustotal API key, if you do not have one, it is a free API... sign up to Virustotal
+                  'apikey': '4dd3c61cdc7c3bd2cc215398c04d54b154be64d2c55582b6731dba93dbb6791a'}  # please enter your Virustotal API key, if you do not have one, it is a free API... sign up to Virustotal
     response = urllib.request.urlopen('%s?%s' % (url, urllib.parse.urlencode(parameters))).read()
 
 
